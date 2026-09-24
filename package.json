@@ -1,0 +1,23 @@
+{
+  "name": "digital-school-registration-system",
+  "version": "1.0.0",
+  "description": "A locally runnable digital school registration and attendance system.",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "seed": "node scripts/seed.js",
+    "cleanup": "node scripts/cleanup.js",
+    "reset-student-assignments": "node scripts/reset-student-assignments.js"
+  },
+  "engines": {
+    "node": ">=22.5.0"
+  },
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "dotenv": "^16.4.7",
+    "express": "^4.22.2"
+  },
+  "overrides": {
+    "qs": "^6.16.0"
+  }
+}

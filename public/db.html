@@ -1,0 +1,16 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <title>Protected Database | Gamini Central College Nuwara Eliya</title><link rel="stylesheet" href="/style.css">
+</head>
+<body class="database-page">
+  <div id="toast" class="toast" role="status"></div>
+  <header class="db-header"><a href="/" class="brand-mark"><img class="brand-logo" src="/school-logo.png" alt="Gamini Central College Nuwara Eliya logo"><div><strong>Gamini Central College Nuwara Eliya</strong><small>Registration System</small></div></a><a href="/" class="text-link">← Back to main system</a></header>
+  <main class="db-main">
+    <section id="dbGate" class="db-gate"><div class="db-gate-icon">▦</div><p class="eyebrow">PROTECTED DATABASE</p><h1 id="dbTitle">DATABASE</h1><p id="dbDescription">Use your staff ID and staff password. On Database 5 only, enter REGID without a password for registration access.</p><form id="dbLoginForm" class="db-login-form"><label>Staff ID<input id="dbStaffId" required placeholder="Enter REGID for Database 5 special access"></label><label>Staff password (not required for REGID on Database 5)<input id="dbStaffPassword" type="password"></label><label>Database password (not required for Principal/Admin or REGID)<input id="dbPassword" type="password"></label><div id="dbLoginError" class="form-error"></div><button class="button button-primary full-width" type="submit">UNLOCK DATABASE <span>→</span></button></form></section>
+    <section id="dbContent" class="db-content hidden"><div class="db-content-heading"><div><p class="eyebrow" id="dbContentKicker">DATABASE</p><h1 id="dbContentTitle">—</h1></div><div class="db-actions"><button class="button button-secondary" id="dbExportButton">EXPORT CSV</button><button class="button button-secondary" id="dbLogoutButton">LOCK DATABASE</button></div></div><div id="dbContentBody"></div></section>
+  </main>
+  <script src="/app.js"></script>
+</body>
+</html>

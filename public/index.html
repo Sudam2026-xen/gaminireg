@@ -1,0 +1,117 @@
+ <!doctype html>
+
+<html lang="en">
+
+<head>
+
+  <meta charset="UTF-8">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Gamini Central College Nuwara Eliya Registration System</title>
+
+  <link rel="stylesheet" href="/style.css">
+
+</head>
+
+<body>
+
+  <div id="toast" class="toast" role="status"></div>
+
+  <div id="landing" class="landing-shell">
+
+    <header class="landing-header">
+
+      <div class="brand-mark"><div class="logo-box"><img class="brand-logo" src="/school-logo.png" alt="Gamini Central College Nuwara Eliya logo"></div><div><strong>Gamini Central College Nuwara Eliya</strong><small>Registration System</small></div></div>
+
+      <span class="secure-label">Secure school operations</span>
+
+    </header>
+
+    <main class="landing-main">
+
+      <section class="hero-copy">
+
+        <p class="eyebrow">SCHOOL ADMINISTRATION PLATFORM</p>
+
+        <h1>Attendance and student records, <span>professionally organized.</span></h1>
+
+        <p class="hero-text">A clear, dependable workspace for class teachers, school leaders, and authorized administrators.</p>
+
+        <div class="hero-actions">
+
+          <button class="button button-primary" id="classLoginButton">LOGIN TO YOUR CLASS <span>→</span></button>
+
+          <button class="button button-secondary" id="adminLoginButton">VIEW SCHOOL REGISTRATION</button>
+          <button class="button button-secondary" id="staffRegistrationButton">REGISTER STAFF</button>
+
+        </div>
+
+        <div class="hero-note"><span class="dot"></span> Student and staff registration across 26 classes</div>
+
+      </section>
+
+      <section class="hero-panel">
+
+        <div class="panel-topline"><span>Today at a glance</span><span class="live-pill">LIVE</span></div>
+
+        <div class="mini-grid"><div class="mini-card"><small>Registered classes</small><strong id="landingRegistered">0 / 26</strong></div><div class="mini-card yellow"><small>Students present</small><strong id="landingAttendance">0%</strong><span class="stat-sub" id="landingAttendanceSub">No student registrations yet</span></div></div>
+
+        <div class="class-preview"><div class="preview-heading"><span>Registration progress</span><span id="landingProgressLabel">School overview</span></div><div class="progress-track"><i id="landingProgress"></i></div><div class="preview-rows"><div><span class="status-dot green"></span><span>Student registration workspace</span><b>Ready</b></div><div><span class="status-dot yellow-dot"></span><span>Student & staff records</span><b>Protected</b></div><div><span class="status-dot black"></span><span>School-wide administration</span><b>Enabled</b></div></div></div>
+
+      </section>
+
+    </main>
+
+    <footer class="landing-footer"><span>Gamini Central College Nuwara Eliya Registration System</span><span>Designed for simple, accountable school administration</span></footer>
+
+  </div>
+
+
+  <div id="appShell" class="app-shell hidden">
+
+    <aside class="sidebar">
+
+      <div class="sidebar-brand"><div class="logo-box"><img class="brand-logo" src="/school-logo.png" alt="Gamini Central College Nuwara Eliya logo"></div><div><strong>Gamini Central College Nuwara Eliya</strong><small>Registration System</small></div></div>
+
+      <div class="sidebar-user"><span class="avatar" id="sidebarAvatar">—</span><div><strong id="sidebarUserName">—</strong><small id="sidebarUserRole">—</small></div></div>
+
+      <nav id="mainNav" class="main-nav"></nav>
+
+      <div class="sidebar-bottom"><a href="/DB/1" class="side-link admin-only"><span>▦</span> Database 1</a><a href="/DB/2" class="side-link admin-only"><span>◫</span> Database 2</a><a href="/DB/3" class="side-link admin-only"><span>♙</span> Database 3</a><a href="/DB/5" class="side-link admin-only"><span>◷</span> Database 5</a><button class="side-link logout-link" id="logoutButton"><span>↪</span> LOGOUT</button></div>
+
+    </aside>
+
+    <main class="content-area">
+
+      <header class="topbar"><div><p class="eyebrow" id="pageKicker">SCHOOL OPERATIONS</p><h2 id="pageTitle">Dashboard</h2></div><div class="topbar-right"><span class="date-chip" id="currentDate">—</span><span class="top-avatar" id="topAvatar">—</span></div></header>
+
+      <div id="viewContainer"></div>
+
+    </main>
+
+  </div>
+
+
+  <div class="modal-backdrop hidden" id="loginModal"><div class="modal login-modal"><button class="modal-close" data-close="loginModal">×</button><div class="modal-kicker">SECURE ACCESS</div><h2 id="loginHeading">Login to your class</h2><p id="loginDescription">Use the staff credentials issued by your school administrator.</p><form id="loginForm"><input type="hidden" id="loginMode" value="class"><label>Staff ID<input id="staffId" required autocomplete="username" placeholder="e.g. 01-880-26"></label><label>Password<input id="staffPassword" type="password" required autocomplete="current-password" placeholder="Enter password"></label><div id="classFields" class="form-grid"><label>Grade<select id="loginGrade" required></select></label><label>Section<select id="loginSection" required></select></label></div><div id="loginError" class="form-error"></div><button class="button button-primary full-width" type="submit" id="loginSubmit">CONTINUE <span>→</span></button></form><p class="modal-footnote">If you need access, contact the school administrator.</p></div></div>
+
+
+  <div class="modal-backdrop hidden" id="studentModal"><div class="modal wide-modal"><button class="modal-close" data-close="studentModal">×</button><div class="modal-kicker" id="studentModalKicker">STUDENT RECORD</div><h2 id="studentModalTitle">Add new student</h2><form id="studentForm"><input type="hidden" id="editingStudentId"><div class="form-grid two-col"><label>Student ID<input id="studentId" required placeholder="Any ID format"></label><label>Register number<input id="studentRegisterNumber" type="number" min="1" max="100" required placeholder="1-100"></label><label>Identification number<input id="studentIdentification" required placeholder="Any number, symbol, or letter"></label><label>House<select id="studentHouse" required><option value="">Select house</option><option>Yellow</option><option>Red</option><option>Blue</option></select></label><label>Full name<input id="studentName" required></label><label>Date of birth<input id="studentDob" type="date" required></label><label>Gender<select id="studentGender" required><option value="">Select gender</option><option>Male</option><option>Female</option><option>Other</option></select></label><label>Parent / Guardian name<input id="studentGuardian" required></label><label>Parent / Guardian phone<input id="studentPhone" required></label><label class="span-2">Address<input id="studentAddress" required></label><label>Emergency contact<input id="studentEmergency" required></label><label>Notes<input id="studentNotes"></label></div><div id="studentFormError" class="form-error"></div><div class="modal-actions"><button type="button" class="button button-secondary" data-close="studentModal">CANCEL</button><button class="button button-primary" type="submit">SAVE STUDENT</button></div></form></div></div>
+
+
+  <div class="modal-backdrop hidden" id="profileModal"><div class="modal wide-modal"><button class="modal-close" data-close="profileModal">×</button><div class="modal-kicker">STUDENT PROFILE</div><h2 id="profileName">—</h2><div id="profileContent" class="profile-grid"></div><div class="modal-actions" id="profileActions"></div></div></div>
+
+
+  <div class="modal-backdrop hidden" id="transferModal"><div class="modal"><button class="modal-close" data-close="transferModal">×</button><div class="modal-kicker">RECORD ACTION</div><h2>Remove / transfer student</h2><p id="transferStudentName">—</p><form id="transferForm"><input type="hidden" id="transferStudentId"><label>Action<select id="transferAction"><option value="transfer">Transfer to another class</option><option value="inactive">Mark inactive</option><option value="leave">Student left school</option></select></label><label id="transferClassLabel">New class<select id="transferClass"></select></label><label>Reason<textarea id="transferReason" rows="3" placeholder="Enter a short reason"></textarea></label><div id="transferError" class="form-error"></div><div class="modal-actions"><button type="button" class="button button-secondary" data-close="transferModal">CANCEL</button><button class="button button-danger" type="submit">CONFIRM ACTION</button></div></form></div></div>
+
+
+  <div class="modal-backdrop hidden" id="staffModal"><div class="modal wide-modal"><button class="modal-close" data-close="staffModal">&times;</button><div class="modal-kicker">STAFF REGISTRATION</div><h2>Register academic or non-academic staff</h2><p>Enter the staff member's name, ID and role for today's staff registration.</p><form id="staffForm"><input type="hidden" id="staffRegDate"><div class="form-grid two-col"><label>ID<input id="staffRegId" required placeholder="Any ID format"></label><label>Name<input id="staffRegName" required placeholder="Full name"></label><label>Entrance time<input id="staffRegTime" type="time" readonly></label><label>Departure time<input id="staffRegDeparture" type="time"></label><label class="span-2">Staff role<select id="staffRegRole" required><option value="">Select staff role</option><option>Teacher</option><option>Principal</option><option>Vice principal</option><option>Assistant Principal</option><option>Other academic staff</option><option>Non academic staff</option></select></label></div><div id="staffFormError" class="form-error"></div><div class="modal-actions"><button type="button" class="button button-secondary" data-close="staffModal">CANCEL</button><button class="button button-primary" type="submit">SUBMIT STAFF REGISTRATION</button></div></form></div></div>
+
+  <div class="modal-backdrop hidden" id="attendanceConfirmModal"><div class="modal"><button class="modal-close" data-close="attendanceConfirmModal">×</button><div class="modal-kicker">CONFIRM SUBMISSION</div><h2>Submit daily registration?</h2><p id="attendanceConfirmText">You are about to submit today's attendance.</p><div id="attendanceConfirmStats" class="confirm-stats"></div><div id="attendanceConfirmError" class="form-error"></div><div class="modal-actions"><button class="button button-secondary" data-close="attendanceConfirmModal">CANCEL</button><button class="button button-primary" id="confirmAttendanceButton">CONFIRM SUBMISSION</button></div></div></div>
+
+
+  <script src="/app.js"></script>
+
+</body>
+
+</html> 
